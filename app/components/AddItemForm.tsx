@@ -40,6 +40,8 @@ export default function AddItemForm({ onAdd }: Props) {
 const styles = StyleSheet.create({
     container: {
         marginBottom: 24,
+        marginLeft: 3,
+        marginRight: 3,
     },
     input: {
         backgroundColor: '#fff',
