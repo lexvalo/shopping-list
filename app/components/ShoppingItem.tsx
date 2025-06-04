@@ -16,12 +16,12 @@ export const ShoppingItem: React.FC<ShoppingItemProps> = ({ id, name, onDelete }
         Animated.parallel([
             Animated.timing(scaleAnim, {
                 toValue: 0.6,
-                duration: 300,
+                duration: 250,
                 useNativeDriver: true,
             }),
             Animated.timing(opacityAnim, {
                 toValue: 0,
-                duration: 300,
+                duration: 250,
                 useNativeDriver: true,
             }),
         ]).start(() => {
