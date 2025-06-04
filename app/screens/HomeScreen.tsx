@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, Text, UIManager, View } from 'react-native';
 import AddItemForm from '../components/AddItemForm';
 import { ShoppingItem } from '../components/ShoppingItem';
 
@@ -22,6 +22,12 @@ export default function HomeScreen() {
   const handleDeleteItem = (id: string) => {
     setItems(prev => prev.filter(item => item.id !== id));
   }
+
+  React.useEffect(() => {
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental?.(true);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useRef } from "react";
+import { Animated, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 interface ShoppingItemProps {
     id: string;
@@ -9,13 +9,36 @@ interface ShoppingItemProps {
 }
 
 export const ShoppingItem: React.FC<ShoppingItemProps> = ({ id, name, onDelete }) => {
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+    const opacityAnim = useRef(new Animated.Value(1)).current;
+
+    const handlePress = () => {
+        Animated.parallel([
+            Animated.timing(scaleAnim, {
+                toValue: 0.6,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+            Animated.timing(opacityAnim, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+        ]).start(() => {
+            onDelete(id);
+        });
+    };
+
     return (
-        <View style={styles.item}>
-            <Text style={styles.name} testID="item-name">{name}</Text>
-            <TouchableOpacity onPress={() => onDelete(id)} style={styles.button}>
-                <MaterialIcons name="close" size={32} color="grey"/>
+        <Animated.View style={[styles.item, {
+            transform: [{ scale: scaleAnim }],
+            opacity: opacityAnim
+        }]}>
+            <Text style={styles.name}>{name}</Text>
+            <TouchableOpacity onPress={handlePress} style={styles.button}>
+                <MaterialIcons name="close" size={32} color="grey" />
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     );
 };
 
@@ -30,7 +53,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 18,
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        marginLeft: 4,
     },
     button: {
         marginLeft: 12,
