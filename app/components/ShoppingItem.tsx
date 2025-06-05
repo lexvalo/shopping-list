@@ -34,7 +34,10 @@ export const ShoppingItem: React.FC<ShoppingItemProps> = ({ id, name, onDelete }
             transform: [{ scale: scaleAnim }],
             opacity: opacityAnim
         }]}>
-            <Text style={styles.name}>{name}</Text>
+            <Text 
+            style={styles.name} 
+            numberOfLines={1}
+            ellipsizeMode="tail">{name}</Text>
             <TouchableOpacity onPress={handlePress} style={styles.button}>
                 <MaterialIcons name="close" size={32} color="grey" />
             </TouchableOpacity>
