@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type Props = {
     onAdd: (name: string) => void;
@@ -32,7 +32,9 @@ export default function AddItemForm({ onAdd }: Props) {
                 onChangeText={setName}
                 style={styles.input}
             />
-            <Button title="Add" onPress={handleAdd} />
+            <TouchableOpacity style={styles.button} onPress={handleAdd}>
+                <Text style={styles.buttonText}>Add</Text> 
+            </TouchableOpacity>
         </View>
     );
 }
@@ -42,6 +44,8 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         marginLeft: 3,
         marginRight: 3,
+        display: 'flex',
+        flexDirection: 'row'
     },
     input: {
         backgroundColor: '#fff',
@@ -49,5 +53,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 8,
         fontFamily: 'Poppins_400Regular',
+        flex: 4,
+        marginRight: 16
     },
+    button: {
+        flex: 1,
+        backgroundColor: "#4B7F7F",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 22,
+        height: 48
+    },
+    buttonText: {
+        color: 'white',
+    }
 });
