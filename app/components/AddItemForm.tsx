@@ -41,7 +41,7 @@ export default function AddItemForm({ onAdd }: Props) {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 92,
+        marginBottom: 42,
         marginLeft: 3,
         marginRight: 3,
         display: 'flex',
