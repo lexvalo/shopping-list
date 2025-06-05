@@ -1,3 +1,4 @@
+import { OpenSans_400Regular } from '@expo-google-fonts/open-sans';
 import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
 import React from "react";
@@ -6,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
+    OpenSans_400Regular,
     Poppins_400Regular,
     Poppins_600SemiBold,
   });

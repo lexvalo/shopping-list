@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     name: {
-        fontSize: 18,
-        fontFamily: 'Poppins_400Regular',
+        fontSize: 22,
+        fontFamily: 'OpenSans_400Regular',
         marginLeft: 4,
     },
     button: {

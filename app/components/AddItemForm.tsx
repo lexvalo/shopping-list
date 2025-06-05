@@ -45,16 +45,19 @@ const styles = StyleSheet.create({
         marginLeft: 3,
         marginRight: 3,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     input: {
         backgroundColor: '#fff',
         padding: 12,
         borderRadius: 8,
         marginBottom: 8,
-        fontFamily: 'Poppins_400Regular',
-        flex: 4,
-        marginRight: 16
+        fontFamily: 'OpenSans_400Regular',
+        fontSize: 18,
+        width: '75%',
+        marginRight: 18,
+        paddingVertical: 10,
     },
     button: {
         flex: 1,
@@ -62,9 +65,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 22,
-        height: 48
+        height: 42,
+        width: '25%',
+        bottom: 2.5,
     },
     buttonText: {
         color: 'white',
+        fontSize: 16,
     }
 });

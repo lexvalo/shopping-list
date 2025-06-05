@@ -43,10 +43,11 @@ export default function HomeScreen() {
         ListHeaderComponent={
           <>
             <Text style={styles.title}>Shopping list 🛒</Text>
-            <AddItemForm onAdd={handleAddItem} />
+            
           </>
         }
       />
+      <AddItemForm onAdd={handleAddItem} />
       <StatusBar style="dark" />
     </View>
   );
@@ -63,6 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: 'Poppins_600SemiBold',
     color: '#4B7F7F',
-    paddingBottom: 20,
+    paddingBottom: 40,
   },
 });
