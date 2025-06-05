@@ -76,22 +76,25 @@ export default function HomeScreen() {
         }}
       >
         <View style={styles.container}>
-          <FlatList 
-            data={items}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => 
-              <ShoppingItem
-                id={item.id} 
-                name={item.name}
-                onDelete={handleDeleteItem}  
-              />}
-            ListHeaderComponent={
-              <>
-                <Text style={styles.title}>Shopping list 🛒</Text>
-                <Text style={styles.title}></Text>
-              </>
-            }
-          />
+          <View style={{ flex: 1 }}>
+            <FlatList 
+              data={items}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => 
+                <ShoppingItem
+                  id={item.id} 
+                  name={item.name}
+                  onDelete={handleDeleteItem}  
+                />}
+              ListHeaderComponent={
+                <>
+                  <Text style={styles.title}>Shopping list 🛒</Text>
+                  <Text style={styles.title}></Text>
+                </>
+              }
+              contentContainerStyle={{ paddingBottom: 80 }}
+            />
+          </View>
           <AddItemForm onAdd={handleAddItem} />
           <StatusBar style="dark" />
         </View>
@@ -106,7 +109,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F5F5',
     paddingTop: 60,
     paddingHorizontal: 20,
-    justifyContent: 'space-between',
   },
   title: {
     fontSize: 34,
