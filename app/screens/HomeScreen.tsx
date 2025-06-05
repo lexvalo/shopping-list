@@ -1,8 +1,11 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
 import { FlatList, Platform, StyleSheet, Text, UIManager, View } from 'react-native';
 import AddItemForm from '../components/AddItemForm';
 import { ShoppingItem } from '../components/ShoppingItem';
+
+const STORAGE_KEY = '@shopping_list';
 
 export default function HomeScreen() {
   const [items, setItems] = useState<{ id: string; name: string }[]>([
@@ -10,6 +13,26 @@ export default function HomeScreen() {
     { id: '2', name: 'Leipä' },
     { id: '3', name: 'Sitruuna' },
   ]);
+
+  const saveItems = async (itemsToSave: { id: string; name: string }[]) => {
+    try {
+      const jsonValue = JSON.stringify(itemsToSave);
+      await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
+    } catch (e) {
+      console.error("Failed to save items", e);
+    }
+  };
+
+  const loadItems = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.error("Failed to load items", e);
+      return null;
+    }
+  };
+
 
   const handleAddItem = (name: string) => {
     const newItem = {
@@ -27,7 +50,18 @@ export default function HomeScreen() {
     if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental?.(true);
     }
+    
+    (async () => {
+      const savedItems = await loadItems();
+      if (savedItems) {
+        setItems(savedItems);
+      }
+    })();
   }, []);
+
+  React.useEffect(() => {
+    saveItems(items);
+  }, [items]);
 
   return (
     <View style={styles.container}>
@@ -43,7 +77,7 @@ export default function HomeScreen() {
         ListHeaderComponent={
           <>
             <Text style={styles.title}>Shopping list 🛒</Text>
-            
+            <Text style={styles.title}></Text>
           </>
         }
       />
@@ -61,9 +95,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 34,
+    textAlign: 'center',
     fontFamily: 'Poppins_600SemiBold',
     color: '#4B7F7F',
-    paddingBottom: 40,
+    paddingBottom: 30,
   },
 });
