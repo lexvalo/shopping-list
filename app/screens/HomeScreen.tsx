@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
-import { FlatList, Platform, StyleSheet, Text, UIManager, View } from 'react-native';
+import { FlatList, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableWithoutFeedback, UIManager, View } from 'react-native';
 import AddItemForm from '../components/AddItemForm';
 import { ShoppingItem } from '../components/ShoppingItem';
 
@@ -39,7 +39,7 @@ export default function HomeScreen() {
       id: Date.now().toString(),
       name,
     };
-    setItems((prev) => [newItem, ...prev]);
+    setItems((prev) => [...prev, newItem]);
   };
 
   const handleDeleteItem = (id: string) => {
@@ -64,26 +64,39 @@ export default function HomeScreen() {
   }, [items]);
 
   return (
-    <View style={styles.container}>
-      <FlatList 
-        data={items}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => 
-        <ShoppingItem
-          id={item.id} 
-          name={item.name}
-          onDelete={handleDeleteItem}  
-         />}
-        ListHeaderComponent={
-          <>
-            <Text style={styles.title}>Shopping list 🛒</Text>
-            <Text style={styles.title}></Text>
-          </>
-        }
-      />
-      <AddItemForm onAdd={handleAddItem} />
-      <StatusBar style="dark" />
-    </View>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback
+        onPress={() => {
+          if (Platform.OS !== 'web') {
+            Keyboard.dismiss();
+          }
+        }}
+      >
+        <View style={styles.container}>
+          <FlatList 
+            data={items}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => 
+              <ShoppingItem
+                id={item.id} 
+                name={item.name}
+                onDelete={handleDeleteItem}  
+              />}
+            ListHeaderComponent={
+              <>
+                <Text style={styles.title}>Shopping list 🛒</Text>
+                <Text style={styles.title}></Text>
+              </>
+            }
+          />
+          <AddItemForm onAdd={handleAddItem} />
+          <StatusBar style="dark" />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -93,12 +106,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F5F5',
     paddingTop: 60,
     paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 34,
     textAlign: 'center',
     fontFamily: 'Poppins_600SemiBold',
     color: '#4B7F7F',
-    paddingBottom: 30,
+    paddingBottom: 16,
   },
 });
