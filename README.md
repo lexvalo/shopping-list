@@ -2,7 +2,7 @@
 
 A simple shopping list application built with **React Native** using **Expo**.  
 This project was created to explore the basics of React Native and Expo.
-![shopping list app](image.png)
+![shopping list app](image-1.png)
 ---
 
 ## 🚀 Getting Started
