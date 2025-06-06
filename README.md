@@ -30,28 +30,6 @@ This project was created to explore the basics of React Native and Expo.
 
 ---
 
-## 📦 Building APK
-
-To generate an `.apk` for testing without publishing to the Play Store:
-
-```bash
-eas build --platform android --profile production
-```
-
-Make sure your `eas.json` includes:
-
-```json
-{
-  "build": {
-    "production": {
-      "android": {
-        "buildType": "apk"
-      }
-    }
-  }
-}
-```
-
 ## 📚 Learn More
 
 - [Expo Docs](https://docs.expo.dev/)
