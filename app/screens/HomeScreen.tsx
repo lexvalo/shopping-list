@@ -109,6 +109,7 @@ export default function HomeScreen() {
             }
             contentContainerStyle={styles.listContent}
             style={styles.flatList}
+            showsVerticalScrollIndicator={false}
           />
           <View style={styles.formContainer}>
             <AddItemForm onAdd={handleAddItem} />

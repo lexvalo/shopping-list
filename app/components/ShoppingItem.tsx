@@ -39,7 +39,11 @@ export default function ShoppingItem({ id, name, onDelete }: ShoppingItemProps) 
         },
       ]}
     >
-      <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+      <Text
+        style={styles.name}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
         {name}
       </Text>
       <TouchableOpacity onPress={handlePress} style={styles.button}>
@@ -55,15 +59,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderBottomColor: '#ccc',
     alignItems: 'center',
   },
   name: {
+    flex: 1,
     fontSize: 22,
     fontFamily: 'OpenSans_400Regular',
     marginLeft: 4,
+    marginRight: 8,
   },
   button: {
-    marginLeft: 12,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
